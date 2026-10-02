@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: sugar-spice-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/products
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: MONGODB_URI
+        sync: false # paste your MongoDB Atlas connection string in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false # paste your Vercel frontend URL, e.g. https://sugar-spice.vercel.app
+      - key: ADMIN_EMAIL
+        value: admin@sugarspice.pk
+      - key: ADMIN_PASSWORD
+        sync: false # set a strong password in Render dashboard BEFORE running the seed

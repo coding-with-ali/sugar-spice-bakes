@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Sugar & Spice Bakes — design tokens.
+   Keep in sync with lib/theme.ts. Change hexes here to re-skin the site.
+------------------------------------------------------------------- */
+@theme {
+  --color-cream: #fff9f1;
+  --color-creamdark: #f7ebdc;
+  --color-cocoa: #3b2417;
+  --color-cocoasoft: #4e3220;
+  --color-caramel: #c68b4e;
+  --color-carameldark: #a96f36;
+  --color-raspberry: #b23a5e;
+  --color-raspberrydeep: #8c2a47;
+  --color-pinksoft: #f9e3e8;
+  --color-butter: #f6c453;
+  --color-mint: #7fb069;
+
+  --font-display: var(--font-ssb-display), "Fraunces", "Georgia", serif;
+  --font-sans: var(--font-ssb-sans), "Inter", "Helvetica Neue", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fff9f1;
+  color: #3b2417;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #b23a5e;
+  color: #fff;
+}
+
+/* thin playful scrollbar for drawers */
+.nice-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.nice-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: #e5c9a8;
+  border-radius: 999px;
+}
+
+/* ------- marquee ribbon ------- */
+@keyframes ssb-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: ssb-marquee 26s linear infinite;
+  will-change: transform;
+}
+
+/* ------- slow cinematic zoom for hero imagery ------- */
+@keyframes ssb-slow-zoom {
+  from { transform: scale(1.14); }
+  to { transform: scale(1); }
+}
+.animate-slow-zoom {
+  animation: ssb-slow-zoom 2.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+}
+
+/* ------- gentle float for doodles ------- */
+@keyframes ssb-float {
+  0%, 100% { transform: translateY(0) rotate(var(--float-rot, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--float-rot, 0deg)); }
+}
+.animate-float {
+  animation: ssb-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ------- wiggle for sticker badges ------- */
+@keyframes ssb-wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+.animate-wiggle {
+  animation: ssb-wiggle 3.4s ease-in-out infinite;
+}
+
+/* ------- shimmer sweep on CTA buttons ------- */
+@keyframes ssb-shimmer {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to { transform: translateX(240%) skewX(-18deg); }
+}
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: ssb-shimmer 3.2s ease-in-out infinite;
+}
+
+/* ------- dotted "sprinkle" texture for section backgrounds ------- */
+.sprinkles {
+  background-image: radial-gradient(rgba(182, 58, 94, 0.14) 2.5px, transparent 2.5px);
+  background-size: 34px 34px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-slow-zoom,
+  .animate-float,
+  .animate-wiggle,
+  .btn-shimmer::after {
+    animation: none;
+  }
+}
